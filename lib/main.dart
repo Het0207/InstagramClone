@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
       title: 'Instagram Clone',
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
       // home: ResponsiveLayout(mobileScreenLayout :MobileScreenLayout (), webScreenLayout :WebScreenLayout()),
-      home: SignupScreen(),
+      // home: SignupScreen(),
+      home: LoginScreen()
     );
   }
 }

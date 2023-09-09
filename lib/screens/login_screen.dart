@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,6 +21,16 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+  void loginUser() async{
+    String res = await AuthMethods().loginUser(email: _emailController.text, password: _passwordController.text);
+
+    if(res == "success"){
+      //
+    }
+    else{
+      showSnackBar(res, context);
+    }
   }
 
   @override
@@ -64,16 +76,17 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               //login button
               InkWell(
+                  onTap: loginUser,
                   child: Container(
                     child: const Text(("Log in")),
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: const ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                        ),
-                        color: blueColor),
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      decoration: const ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                          ),
+                          color: blueColor),
               )),
               const SizedBox(
                 height: 12,
