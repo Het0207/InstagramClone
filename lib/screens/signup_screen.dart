@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
+import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/utils.dart';
 
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsive_layout_screen.dart';
+import '../responsive/web_screen_layout.dart';
 import '../utils/colors.dart';
 import '../widgets/text_field_input.dart';
 
@@ -54,9 +58,21 @@ void signUpUser() async {
     showSnackBar(res, context);
   }
   else{
-    //nothing
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) =>  const ResponsiveLayout(mobileScreenLayout :MobileScreenLayout (), webScreenLayout :WebScreenLayout()),
+      ),
+    );
   }
 }
+
+  void navigateToLogin(){
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +161,7 @@ void signUpUser() async {
               const SizedBox(
                 height: 24,
               ),
-              //login button
+              //sigup button
               InkWell(
                 onTap: signUpUser,
                 child: Container(
@@ -175,14 +191,14 @@ void signUpUser() async {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: const Text("Dont Have an account?"),
+                    child: const Text("Already Have an account?"),
                     padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
                   GestureDetector(
-                      onTap: () {},
+                      onTap: navigateToLogin,
                       child: Container(
                         child: const Text(
-                          "Sign Up",
+                          "Login",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         padding: const EdgeInsets.symmetric(vertical: 8),
